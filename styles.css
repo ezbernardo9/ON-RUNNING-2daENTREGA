@@ -1,0 +1,147 @@
+/* ===== Variables y resets ===== */
+:root{
+  --bg:#ffffff; --text:#111; --muted:#555; --line:#e6e6e6;
+  --accent:#00AEEF; --card:#fafafa; --promo:#E9F3FB;
+  --container:1200px; --radius:12px;
+}
+*{ box-sizing:border-box }
+html,body{ margin:0; padding:0 }
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+  color:var(--text); background:var(--bg); line-height:1.5;
+}
+.container{
+  width:min(100% - 2rem, var(--container));
+  margin-inline:auto;                 /* centrado real del contenedor */
+}
+
+/* ===== Header ===== */
+.site-header{ border-bottom:1px solid var(--line); background:#fff }
+.header-inner{ display:flex; align-items:center; justify-content:space-between; padding:1rem 0 }
+.brand{ display:inline-flex; align-items:center; text-decoration:none }
+.brand-logo{ height:32px; width:auto; display:block }
+.nav a{ color:var(--text); text-decoration:none; padding:.5rem .75rem; border-radius:8px }
+.nav a:hover{ background:#f5f5f5 }
+.nav a.active{ background:var(--accent); color:#fff }
+
+/* ===== Secciones ===== */
+.section{ padding:3rem 0; margin:0; align-items:center }
+.section-title{ margin:0 0 1rem; font-size:1.75rem }
+
+/* ===== Imágenes base ===== */
+/* Marco de imagen sin márgenes externos para evitar desalineaciones */
+.img-frame{
+  margin:0;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--line);
+  position:relative;                  /* permite fill total del <img> */
+}
+
+/* El <img> llena el marco y queda centrado, sin deformar */
+.img-frame > img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;                   /* recorte parejo */
+  object-position:center;             /* centrado simétrico */
+}
+
+/* ===== Utilidades de proporción ===== */
+.img-3x2   { aspect-ratio:3/2 }
+.img-16x10 { aspect-ratio:16/10 }
+.img-21x9  { aspect-ratio:21/9 }
+.img-1x1   { aspect-ratio:1/1 }
+
+/* Si en algún marco querés que NO recorte, sumá esta clase extra */
+.img-fit-contain > img{ object-fit:contain }
+
+/* ===== Hero ===== */
+.hero{ background:var(--promo) }
+.hero-inner{
+  display:grid; grid-template-columns:1.1fr .9fr; gap:2rem; align-items:center; padding:3.5rem 0;
+}
+.hero-copy h1{ margin:0 0 .5rem; font-size:clamp(1.8rem,3.2vw,3rem) }
+.hero-copy p{ color:var(--muted); margin:0 0 1rem }
+.hero .img-frame{ aspect-ratio:16/10 } /* hereda el centrado del bloque base */
+
+/* ===== Grid y cards ===== */
+.grid{ display:grid; gap:1rem }
+.cards-4{ grid-template-columns:repeat(4,1fr) }
+.cards-3{ grid-template-columns:repeat(3,1fr) }
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+/* --- IMG de tarjetas: centrada 3:2 (Sora) --- */
+.card-img{
+  padding:16px;                /* margen interno uniforme */
+  aspect-ratio:3/2;
+  overflow:hidden;
+  border-radius:16px;
+  background:#fff;
+  border:0;
+  display:block;
+}
+.card-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;            /* llena el 3:2 sin deformar */
+  object-position:center;
+  border-radius:12px;
+  margin:0;
+}
+
+.card-body{ padding:1rem; display:flex; flex-direction:column; gap:.5rem }
+.price{ color:var(--muted); margin:0 }
+
+/* ===== Promo ===== */
+.promo-banner{
+  background:var(--promo);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1rem;
+}
+.promo-banner .img-frame{ aspect-ratio:21/9 }  /* usa 21:9 en tu banner */
+
+/* ===== Contacto ===== */
+.contact-grid{ display:grid; grid-template-columns:2fr 1fr; gap:2rem }
+.form{ display:grid; gap:.75rem }
+.form label{ display:grid; gap:.35rem }
+input,textarea{
+  width:100%; padding:.8rem .9rem; border:1px solid var(--line); border-radius:10px; font:inherit;
+}
+
+/* ===== Botones ===== */
+.btn{
+  display:inline-block; background:var(--accent); color:#fff; text-decoration:none;
+  padding:.8rem 1.1rem; border-radius:10px; border:none; cursor:pointer;
+}
+.btn:hover{ filter:brightness(0.95) }
+.btn-sm{ padding:.5rem .8rem; font-size:.95rem }
+.btn-light{ background:#fff; color:#111; border:1px solid var(--line) }
+
+/* ===== Footer ===== */
+.site-footer{ border-top:1px solid var(--line); background:#111; color:#fff }
+.footer-inner{ display:flex; justify-content:space-between; align-items:center; padding:1rem 0 }
+.footer-nav a{ color:#fff; opacity:.9 }
+
+/* ===== Responsive ===== */
+@media (max-width:1024px){
+  .cards-4{ grid-template-columns:repeat(3,1fr) }
+  .hero-inner{ grid-template-columns:1fr }
+}
+@media (max-width:768px){
+  .cards-4,.cards-3{ grid-template-columns:repeat(2,1fr) }
+  .contact-grid{ grid-template-columns:1fr }
+}
+@media (max-width:480px){
+  .cards-4,.cards-3{ grid-template-columns:1fr }
+}
